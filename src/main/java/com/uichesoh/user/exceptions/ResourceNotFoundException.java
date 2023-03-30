@@ -1,4 +1,4 @@
-package com.uichesoh.user.exception;
+package com.uichesoh.user.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
 

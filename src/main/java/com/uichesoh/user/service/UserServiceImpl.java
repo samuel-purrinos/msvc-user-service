@@ -1,12 +1,11 @@
 package com.uichesoh.user.service;
 
 import com.uichesoh.user.entity.User;
-import com.uichesoh.user.exception.ResourceNotFoundException;
+import com.uichesoh.user.exceptions.ResourceNotFoundException;
 import com.uichesoh.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.module.ResolutionException;
 import java.util.List;
 import java.util.UUID;
 
