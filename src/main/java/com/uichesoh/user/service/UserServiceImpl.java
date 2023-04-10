@@ -4,6 +4,7 @@ import com.uichesoh.user.entities.Hotel;
 import com.uichesoh.user.entities.Review;
 import com.uichesoh.user.entities.User;
 import com.uichesoh.user.exceptions.ResourceNotFoundException;
+import com.uichesoh.user.external.HotelService;
 import com.uichesoh.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,8 @@ public class UserServiceImpl implements UserService{
     private RestTemplate restTemplate;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private HotelService hotelService;
     @Override
     public User save(User user) {
         String randomUserId = UUID.randomUUID().toString();
@@ -44,9 +47,7 @@ public class UserServiceImpl implements UserService{
         List<Review> reviews = Arrays.stream(userReviews).collect(Collectors.toList());
         List<Review> reviewList = reviews.stream().map(review -> {
             logger.info("Getting hotel with id {}",review.getHotelId());
-            ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTEL-SERVICE/api/v1/hotels/"+review.getHotelId(),Hotel.class);
-            Hotel hotel = forEntity.getBody();
-            logger.info("Hotel Service response with status code : {} ",forEntity.getStatusCode());
+            Hotel hotel = hotelService.getHotel(review.getHotelId());
             review.setHotel(hotel);
             return review;
         }).collect(Collectors.toList());
