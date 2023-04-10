@@ -1,13 +1,13 @@
-package com.uichesoh.user.entity;
+package com.uichesoh.user.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,5 +25,6 @@ public class User {
     private String email;
     @Column(name = "info", length = 100)
     private String info;
-
+    @Transient
+    private List<Review> reviews = new ArrayList<Review>();
 }

@@ -1,6 +1,6 @@
 package com.uichesoh.user.controllers;
 
-import com.uichesoh.user.entity.User;
+import com.uichesoh.user.entities.User;
 import com.uichesoh.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

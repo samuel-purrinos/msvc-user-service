@@ -1,6 +1,6 @@
 package com.uichesoh.user.service;
 
-import com.uichesoh.user.entity.User;
+import com.uichesoh.user.entities.User;
 
 import java.util.List;
 public interface UserService {
