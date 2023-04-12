@@ -3,6 +3,7 @@ package com.uichesoh.user.controllers;
 import com.uichesoh.user.entities.User;
 import com.uichesoh.user.service.UserService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,10 +28,14 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
-
+    int retryCount=1;
     @GetMapping("/{id}")
-    @CircuitBreaker(name ="ratingHotelBreaker",fallbackMethod = "ratingHotelFallBack")
+    //@CircuitBreaker(name ="ratingHotelBreaker",fallbackMethod = "ratingHotelFallBack")
+    @Retry(name="ratingHotelBreaker",fallbackMethod = "ratingHotelFallBack")
     public ResponseEntity<User> getUserById(@PathVariable String id) {
+        log.info("Get 1 User : UserController");
+        log.info("RetryCount {}",retryCount);
+        retryCount++;
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
